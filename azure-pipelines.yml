@@ -25,3 +25,14 @@ steps:
       2>&1 go test -v ./... | go2xunit -output tests.xml
     workingDirectory: $(modulePath)
     displayName: "Get dependencies and run tests"
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'xUnit' # Options: JUnit, NUnit, VSTest, xUnit
+    testResultsFiles: '**/tests.xml' 
+    #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+    #mergeTestResults: false # Optional
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    #publishRunAttachments: true # Optional
