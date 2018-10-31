@@ -22,7 +22,7 @@ steps:
       go get -v -t -d ./...
       go build -v .
       go get github.com/tebeka/go2xunit
-      2>&1 go test -v ./... | go2xunit -output tests.xml
+      2>&1 go test -v ./... | go2xunit -xunitnet -output tests.xml
     workingDirectory: $(modulePath)
     displayName: "Get dependencies and run tests"
 
