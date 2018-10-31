@@ -8,8 +8,7 @@ variables:
   modulePath: $(GOPATH)/src/dev.azure.com/rchi-texas/$(build.repository.name)
 
 steps:
-  - displayName: "Set up the Go workspace"
-    script: |
+  - script: |
       mkdir -p '$(GOBIN)'
       mkdir -p '$(GOPATH)/pkg'
       mkdir -p '$(modulePath)'
@@ -17,9 +16,11 @@ steps:
       mv !(gopath) '$(modulePath)'
       echo '##vso[task.prependpath]$(GOBIN)'
       echo '##vso[task.prependpath]$(GOROOT)/bin'
-  - displayName: "Get dependencies and run tests"
-    script: |
+    displayName: "Set up the Go workspace"
+
+  - script: |
       go get -v -t -d ./...
       go build -v .
       go test ./...
     workingDirectory: $(modulePath)
+    displayName: "Get dependencies and run tests"
